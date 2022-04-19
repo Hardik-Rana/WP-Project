@@ -1,0 +1,50 @@
+ul li{
+    display: inline;
+}
+
+.links ul li a{
+    text-decoration: none;
+    color: #ffffff;
+    padding: 15px;
+    font-size: larger;
+}
+
+.links ul li a:hover{
+    color: lightcoral;
+}
+
+.row{
+    --bs-gutter-x: 0 rem !important;
+}
+
+
+.forgot_pass a{
+    text-decoration: none;
+}
+
+.delete_link{
+    text-decoration: none;
+}
+
+/* .search{
+    width: 5%;
+} */
+
+.fixedButton{
+    position: fixed;
+    bottom: 0px;
+    right: 0px; 
+    padding: 20px;
+}
+.roundedFixedBtn{
+  height: 60px;
+  line-height: 62px;  
+  width: 60px;  
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: #DC3545;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
