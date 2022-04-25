@@ -9,64 +9,62 @@ const Logs = (props) => {
   const  logContext=useContext(LogContext);
   const {username,clearUser,setLoading} = logContext;
   const [data, setData] = useState(null);
-  var logs1;
+  const [logs,setLogs]= useState(null);
+  
   
   const getLogs= async ()=>{
 
     await fetch("https://jk-diamonds.000webhostapp.com/wp_practicals/ReadAll.php")
     .then((response) => response.text())
     .then((response) => setData(response)); 
-
-    // response ma string ayi rai che ane me setData me store kari ahiya!
-    
+     
   }
   
   
   useEffect(() => {
     getLogs();
-    logs1 = JSON.parse(data);      // logs1 ma json object ayi jase 
-    console.log(typeof(logs1),logs1);
-    console.log("Hello");
+    setLogs(JSON.parse(data));
   },[data]);
   
 
 
-    const logs= [{
-      "ID": "1",
-      "LOG": "Changed hard drive on workstation 005",
-      "attention": true,
-      "USERNAME": "Rana Hardik",
-      "DATE": "2022-03-01T00:52:44.991Z"
-    },
-    {
-      "ID": "2",
-      "LOG": "Workstation 007 not posting",
-      "attention": false,
-      "USERNAME": "Hiren",
-      "DATE": "2022-03-01T01:34:46.120Z"
-    },
+    // const logs= [{
+    //   "ID": "1",
+    //   "LOG": "Changed hard drive on workstation 005",
+    //   "attention": true,
+    //   "USERNAME": "Rana Hardik",
+    //   "DATE": "2022-03-01T00:52:44.991Z"
+    // },
+    // {
+    //   "ID": "2",
+    //   "LOG": "Workstation 007 not posting",
+    //   "attention": false,
+    //   "USERNAME": "Hiren",
+    //   "DATE": "2022-03-01T01:34:46.120Z"
+    // },
     
-    {
-      "ID": "3",
-        "LOG": "Changed memory on workstation 050",
-        "attention": false,
-        "USERNAME": "Dhyey",
-        "DATE": "2022-03-01T01:34:40.658Z"
-      },
-      {
-        "ID": "4",
-        "LOG": "Changed memory on workstation 050",
-        "attention": false,
-        "USERNAME": "Shyam",
-        "DATE": "2022-03-01T01:34:40.658Z"
-      }
-    ]; 
+    // {
+    //   "ID": "3",
+    //     "LOG": "Changed memory on workstation 050",
+    //     "attention": false,
+    //     "USERNAME": "Dhyey",
+    //     "DATE": "2022-03-01T01:34:40.658Z"
+    //   },
+    //   {
+    //     "ID": "4",
+    //     "LOG": "Changed memory on workstation 050",
+    //     "attention": false,
+    //     "USERNAME": "Shyam",
+    //     "DATE": "2022-03-01T01:34:40.658Z"
+    //   }
+    // ]; 
     
     
     
     if(username){
+
       
-  return (
+      return (
     <div>
            <nav className="navbar navbar-light bg-dark">
         <div className="container-fluid">
@@ -84,7 +82,7 @@ const Logs = (props) => {
   </div>
 </nav>
         <div className="row">
-            <div className="col-md-1"></div>
+          <div className="col-md-1"></div>
             <div className="col-md-10">
 
               <div className="row"></div>
@@ -94,8 +92,8 @@ const Logs = (props) => {
     
     <h1> System Logs</h1>
   </div>
-
-{logs1 && logs1.map(log=> <LogItem key={log.ID} log={log}/>)}   
+          
+{logs && logs.map(log=> <LogItem key={log.ID} log={log}/>)}   
 </div>
                 </div>
             </div>
