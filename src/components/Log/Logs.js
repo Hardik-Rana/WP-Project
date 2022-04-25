@@ -1,42 +1,73 @@
-import React from 'react'
+import React,{useContext, useEffect, useState} from 'react'
+import {Link} from 'react-router-dom';
 import LogItem from './LogItem';
 import Addlog from './AddLog';
+import LogContext from '../../context/log/logContext';
 
-const Logs = () => {
+const Logs = (props) => {
+
+  const  logContext=useContext(LogContext);
+  const {username,clearUser,setLoading} = logContext;
+  const [data, setData] = useState(null);
+  var logs1;
+  
+  const getLogs= async ()=>{
+
+    await fetch("https://jk-diamonds.000webhostapp.com/wp_practicals/ReadAll.php")
+    .then((response) => response.text())
+    .then((response) => setData(response)); 
+
+    // response ma string ayi rai che ane me setData me store kari ahiya!
+    
+  }
+  
+  
+  useEffect(() => {
+    getLogs();
+    logs1 = JSON.parse(data);      // logs1 ma json object ayi jase 
+    console.log(typeof(logs1),logs1);
+    console.log("Hello");
+  },[data]);
+  
+
 
     const logs= [{
-        "id": "1",
-      "message": "Changed hard drive on workstation 005",
+      "ID": "1",
+      "LOG": "Changed hard drive on workstation 005",
       "attention": true,
-      "tech": "Rana Hardik",
-      "date": "2022-03-01T00:52:44.991Z"
+      "USERNAME": "Rana Hardik",
+      "DATE": "2022-03-01T00:52:44.991Z"
     },
     {
-        "id": "2",
-        "message": "Workstation 007 not posting",
+      "ID": "2",
+      "LOG": "Workstation 007 not posting",
+      "attention": false,
+      "USERNAME": "Hiren",
+      "DATE": "2022-03-01T01:34:46.120Z"
+    },
+    
+    {
+      "ID": "3",
+        "LOG": "Changed memory on workstation 050",
         "attention": false,
-        "tech": "Hiren",
-        "date": "2022-03-01T01:34:46.120Z"
+        "USERNAME": "Dhyey",
+        "DATE": "2022-03-01T01:34:40.658Z"
       },
-      
       {
-        "id": "3",
-        "message": "Changed memory on workstation 050",
+        "ID": "4",
+        "LOG": "Changed memory on workstation 050",
         "attention": false,
-        "tech": "Dhyey",
-        "date": "2022-03-01T01:34:40.658Z"
-      },
-      {
-        "id": "4",
-        "message": "Changed memory on workstation 050",
-        "attention": false,
-        "tech": "Shyam",
-        "date": "2022-03-01T01:34:40.658Z"
+        "USERNAME": "Shyam",
+        "DATE": "2022-03-01T01:34:40.658Z"
       }
-]; 
-
-    return (
-      <div>
+    ]; 
+    
+    
+    
+    if(username){
+      
+  return (
+    <div>
            <nav className="navbar navbar-light bg-dark">
         <div className="container-fluid">
     <form className="d-flex">
@@ -44,8 +75,10 @@ const Logs = () => {
     </form>
     <div className="links">
       <ul className="text-white mt-2">
-          <li className="mx-4"> <span className="h5"> Hello @username </span></li>
-          <li className="mx-2"> <a href="#"> <b> Logout</b></a> </li>
+         {username && <li className="mx-4"> <span className="h5">Hello {username} <i className="fa fa-hand-spock-o" aria-hidden="true"></i></span></li>}
+          <li className="mx-2"> <Link to="/" onClick={()=>{
+            clearUser();
+          }}><b>Logout</b></Link> </li>
       </ul>
     </div>
   </div>
@@ -59,9 +92,10 @@ const Logs = () => {
             <div className="card mt-5" >
   <div className="card-header bg-dark text-danger text-center">
     
-    <h1>System Logs</h1>
+    <h1> System Logs</h1>
   </div>
-  {logs.map(log=> <LogItem key={log.id} log={log}/>)}
+
+{logs1 && logs1.map(log=> <LogItem key={log.ID} log={log}/>)}   
 </div>
                 </div>
             </div>
@@ -69,15 +103,28 @@ const Logs = () => {
 
             {/* <div className='fixed-action-btn'>
 
-            <a href="#add-log-modal"className="fixedButton">
-              <div className="roundedFixedBtn">
-          <i className="fa fa-plus"></i>
-              </div>
-      </a>
-            </div> */}
+<a href="#add-log-modal"className="fixedButton">
+<div className="roundedFixedBtn">
+<i className="fa fa-plus"></i>
+</div>
+</a>
+</div> */}
+        {/* <div>{data ? data : 'No data yet...'}</div>; */}
         </div>
       
     )
+  }
+  else{
+    return(
+      <div>
+       
+        {props.history.push('/')}
+      </div>
+    )
+  
+  }
+    
 }
 
-export default Logs
+  export default Logs
+  

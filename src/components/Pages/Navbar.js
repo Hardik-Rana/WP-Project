@@ -8,7 +8,7 @@ const Navbar = () => {
        
          <ul>
             <li>
-               <Link to='registration'>Registration</Link>
+               <Link to='/registration'>Registration</Link>
             </li>
 
             <li>
