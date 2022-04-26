@@ -61,7 +61,7 @@ const Logs = (props) => {
     
     
     
-    if(username){
+    // if(username){
 
       
       return (
@@ -69,7 +69,7 @@ const Logs = (props) => {
            <nav className="navbar navbar-light bg-dark">
         <div className="container-fluid">
     <form className="d-flex">
-      <input className="form-control me-2 search" type="search"  placeholder="Search" aria-label="Search"/>
+    <h1 className='text-white'> &nbsp;&nbsp;IT Logger</h1>
     </form>
     <div className="links">
       <ul className="text-white mt-2">
@@ -111,16 +111,16 @@ const Logs = (props) => {
         </div>
       
     )
-  }
-  else{
-    return(
-      <div>
+  // }
+  // else{
+  //   return(
+  //     <div>
        
-        {props.history.push('/')}
-      </div>
-    )
+  //       {props.history.push('/')}
+  //     </div>
+  //   )
   
-  }
+  // }
     
 }
 
