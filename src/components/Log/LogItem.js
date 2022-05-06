@@ -33,7 +33,7 @@ const Log = ({log}) => {
   };
 
     return (
-      <ul className="list-group list-group-flush">
+      <ul className="list-group list-group-flush ">
       <li className="list-group-item">
       <div>
         <a href="#edit-log-modal" className={`delete_link ${log.ATTENTION === "1" ? 'text-danger' : 'text-primary'}`}>{log.LOG}</a>

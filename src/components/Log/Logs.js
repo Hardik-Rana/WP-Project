@@ -27,6 +27,18 @@ const Logs = (props) => {
   },[data]);
   
 
+  // // For show warning before reload page.
+  // useEffect(() => {
+  //   const unloadCallback = (event) => {
+  //     event.preventDefault();
+  //     event.returnValue = "";
+  //     return "";
+  //   };
+  
+  //   window.addEventListener("beforeunload", unloadCallback);
+  //   return () => window.removeEventListener("beforeunload", unloadCallback);
+  // }, []);
+
 
     // const logs= [{
     //   "ID": "1",
@@ -59,9 +71,9 @@ const Logs = (props) => {
     //   }
     // ]; 
     
+      
     
-    
-    // if(username){
+  //  if(username){
 
       
       return (
@@ -87,12 +99,12 @@ const Logs = (props) => {
 
               <div className="row"></div>
               <Addlog/>
-            <div className="card mt-5" >
+            <div className="card mt-5 mb-5" >
   <div className="card-header bg-dark text-danger text-center">
     
     <h1> System Logs</h1>
-  </div>
-          
+  </div >
+        
 {logs && logs.map(log=> <LogItem key={log.ID} log={log}/>)}   
 </div>
                 </div>
